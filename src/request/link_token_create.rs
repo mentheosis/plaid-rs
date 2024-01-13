@@ -258,9 +258,7 @@ impl<'a> ::std::future::IntoFuture for FluentRequest<'a, LinkTokenCreateRequest>
             let url = "/link/token/create";
             let mut r = self.client.client.post(url);
             r = r.set_query(self.params);
-            r = r.headers(|headers| {
-                headers.set("Content-Length", content_length);
-            });
+            r = r.header("Content-Length", "0");
             r = self.client.authenticate(r);
             let res = r.await?;
             res.json().map_err(Into::into)
